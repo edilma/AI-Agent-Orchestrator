@@ -20,7 +20,7 @@ def reflection_message(recipient, messages, sender, config):
 def generate_blog_post_with_review(topic):
     writer = create_writer()
     critic = create_critic()
-    seo_reviewer = create_seo_reviewer()
+    digital_marketer_reviewer = create_digital_marketer_reviewer()
     legal_reviewer = create_legal_reviewer()
     ethics_reviewer = create_ethics_reviewer()
     meta_reviewer = create_meta_reviewer()

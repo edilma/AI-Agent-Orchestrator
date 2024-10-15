@@ -37,53 +37,16 @@ def create_legal_reviewer():
 #         "Begin the review by stating your role. ",
 #         llm_config=llm_config,
 #     )
-
-def create_digital_marketer_reviewer():
-    return autogen.AssistantAgent(
-        name="Digital and Content Marketer",
-        system_message=(
-            "You are a seasoned digital marketing expert and SEO specialist. "
-            "Your role is to review blog posts for marketing effectiveness, SEO optimization, and content quality. "
-            "Please ensure that the blog post includes:\n\n"
-            "**1. Effective Calls to Action (CTAs):**\n"
-            "- Verify the presence of clear and compelling CTAs that encourage the desired user action.\n"
-            "- Assess the placement and frequency of CTAs within the content.\n"
-            "- Ensure CTAs align with the content topic and audience needs.\n\n"
-            "**2. SEO Optimization:**\n"
-            "- Check for the natural integration of relevant keywords and phrases.\n"
-            "- Evaluate meta descriptions, title tags, header tags, and image alt texts.\n"
-            "- Assess content readability, structure, and use of headings and subheadings.\n\n"
-            "**3. Content Quality and Engagement:**\n"
-            "- Ensure the content is original, relevant, and valuable to the target audience.\n"
-            "- Verify that the tone and style are appropriate and engaging.\n"
-            "- Confirm adherence to ethical and legal standards.\n\n"
-            "Provide detailed feedback and actionable suggestions for improvement in each of these areas."
-        ),
-        llm_config=llm_config,
-    )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def marketer_reviewer():
     return autogen.AssistantAgent(
         name="digital and content marketer",
         system_message= "You are a seasoned digital marketer"
         "with expertise in SEO and content optimization. "
         "Review the following blog post to ensure it includes"
-        "effective calls to action, is optimized for online marketing,"
-        "and follows best SEO practices. "
-        "Provide detailed feedback and suggestions for improvement.",
+        "effective and relevant calls to action, seo optimization,"
+        "including keyword usage, meta tags and readability "
+        "Alignment with best practices in content marketing and SEO." 
+        "Provide detailed feedback and actionable suggestions for improvement.",
         llm_config=llm_config,
     )
 
