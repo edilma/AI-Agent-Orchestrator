@@ -1,5 +1,6 @@
 #edilmas prompts
-reviewers.py 
+\blog_generator_project\agents\reviewers.py
+agents/reviewers.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

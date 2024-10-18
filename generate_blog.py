@@ -3,7 +3,7 @@ import json
 from agents.writer import create_writer
 from agents.critic import create_critic
 from utils.helpers import create_task, save_blog_post
-from agents.reviewers import create_seo_reviewer, create_legal_reviewer, create_ethics_reviewer, create_meta_reviewer
+from agents.reviewers import create_digital_marketer_reviewer, create_seo_reviewer, create_legal_reviewer, create_meta_reviewer
 
 # Function to load topics from the JSON file
 def load_topics_from_json(filename):
@@ -22,7 +22,7 @@ def generate_blog_post_with_review(topic):
     critic = create_critic()
     digital_marketer_reviewer = create_digital_marketer_reviewer()
     legal_reviewer = create_legal_reviewer()
-    ethics_reviewer = create_ethics_reviewer()
+    #ethics_reviewer = create_ethics_reviewer()
     meta_reviewer = create_meta_reviewer()
 
     task = create_task(topic)
@@ -30,15 +30,6 @@ def generate_blog_post_with_review(topic):
 
     # Define the nested review process
     review_chats = [
-        {
-         "recipient": seo_reviewer, 
-         "message": reflection_message, 
-         "summary_method": "reflection_with_llm",
-         "summary_args": {
-            "summary_prompt" : "Return review into as JSON object only:{'Reviewer': '', 'Review': ''}. Here Reviewer should be your role",
-         },
-         "max_turns": 1
-        },
         {
         "recipient": legal_reviewer, 
          "message": reflection_message, 
@@ -49,7 +40,7 @@ def generate_blog_post_with_review(topic):
          "max_turns": 1
         },
         {
-        "recipient": ethics_reviewer, 
+        "recipient": digital_marketer_reviewer, 
          "message": reflection_message, 
          "summary_method": "reflection_with_llm",
          "summary_args": {
@@ -83,7 +74,7 @@ if __name__ == "__main__":
 
     # Iterate through each topic and generate blog posts
     for i, topic_data in enumerate(topics):
-        topic = topic_data['title']
+        topic = topic_data['description']
         blog_post = generate_blog_post_with_review(topic)
         
         # Print and save each blog post

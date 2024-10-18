@@ -1,8 +1,7 @@
 def create_task(topic):
     return f'''
-    Write a blog post about "{topic['title']}". 
-    Focus specifically on the following: {topic['description']}.
-    Make sure the post is concise, engaging, and stays within 100 words.
+    Write a blog post about "{topic}". 
+    Make sure the post is concise, engaging, and stays within 200 words.
     '''
 
 def save_blog_post(blog_post, filename):
