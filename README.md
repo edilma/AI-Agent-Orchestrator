@@ -44,7 +44,7 @@ An advanced AI article (or blog) generator powered by multi-agent collaboration 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/blog_generator_project.git
+git clone https://github.com/edilma/AI-Agent-Orchestrator.git
 cd blog_generator_project
 ````
 
