@@ -11,7 +11,7 @@ def generate_blog_post_with_review(topic):
     critic = create_critic()
     digital_marketer_reviewer = create_digital_marketer_reviewer()
     legal_reviewer = create_legal_reviewer()
-    #ethics_reviewer = create_ethics_reviewer()
+    seo_reviewer = create_seo_reviewer()
     meta_reviewer = create_meta_reviewer()
 
     task = create_task(topic)
