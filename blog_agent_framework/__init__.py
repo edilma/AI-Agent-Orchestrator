@@ -37,6 +37,15 @@ def generate_blog_post_with_review(topic):
          },
          "max_turns": 1
         },
+                {
+            "recipient": seo_reviewer, 
+            "message": reflection_message, 
+            "summary_method": "reflection_with_llm",
+            "summary_args": {
+                "summary_prompt" : "Return review into as JSON object only:{'Reviewer': '', 'Review': ''}",
+            },
+            "max_turns": 1
+        },
         {
          "recipient": meta_reviewer, 
          "message": "Aggregate feedback from all reviewers and give final suggestions on the writing.", 

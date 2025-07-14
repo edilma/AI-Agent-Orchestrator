@@ -28,18 +28,6 @@ def create_legal_reviewer():
         llm_config=llm_config,
     )
 
-# def create_ethics_reviewer():
-#     return autogen.AssistantAgent(
-#         name="Ethics Reviewer",
-#         system_message= "You are an ethics reviewer, known for "
-#         "your ability to ensure that content is ethically sound "
-#         "and free from any potential ethical issues. " 
-#         "Make sure your suggestion is concise (within 3 bullet points), "
-#         "concrete and to the point. "
-#         "Begin the review by stating your role. ",
-#         llm_config=llm_config,
-#     )
-
 def create_digital_marketer_reviewer():
     return autogen.AssistantAgent(
         name="Digital and Content Marketer",

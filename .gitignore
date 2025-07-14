@@ -1,7 +1,11 @@
-#edilmas prompts
-\blog_generator_project\agents\reviewers.py
-agents/reviewers.py
+# Cache files
+.cache*
+cache.db
+__pycache__/
 
+# Generated content
+*.md
+*.json
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
