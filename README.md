@@ -1,86 +1,77 @@
 
-# AI-Agent-Orchestrator
+-----
 
-An advanced AI article (or blog) generator powered by multi-agent collaboration using [Autogen](https://microsoft.github.io/autogen/stable//index.html). This project uses autonomous agents to handle different tasks like writing, reviewing, and optimizing blog content for quality, compliance, and relevance.
+# Blog Agent Framework
+
+An advanced framework for building AI-powered content generation pipelines. This project uses a multi-agent system, powered by **Microsoft Autogen**, to autonomously write, critique, and review articles for quality, compliance, and SEO.
 
 ## 🔧 Features
 
-- Multi-agent architecture (writer, critic, reviewers)
-- Built using the [Autogen framework](https://microsoft.github.io/autogen/stable//index.html)
-- Topic selection via JSON or Python script
-- Blog post generation to Markdown files
-- Review and optimization loop using agents
-- Easy-to-configure prompts and logic
+  * **Modular Agent Architecture:** Easily configurable agents for writing, legal review, marketing, and SEO.
+  * **Flexible Orchestration:** A nested chat structure allows for complex review and revision loops.
+  * **Installable as a Library:** Designed to be used as a package in other Python applications.
+  * **Extensible by Design:** Add new agent roles and capabilities by extending the core classes.
 
 ## 📁 Project Structure
 
+The project is structured as a standard Python package, making it easy to install and use.
+
 ```
 .
-├── agents/                  # AI agents for writing and reviewing
-│   ├── critic.py
-│   ├── reviewers.py
-│   ├── reviewers_old.py
-│   └── writer.py
+├── blog_agent_framework/
+│   ├── __init__.py          # Exposes the main generation function
+│   ├── agents/
+│   │   ├── __init__.py
+│   │   ├── critic.py
+│   │   ├── reviewers.py
+│   │   └── writer.py
+│   └── utils/
+│       ├── __init__.py
+│       └── helpers.py
 │
-├── utils/                   # Helper functions
-│   └── helpers.py
-│
-├── blog_post_1.md           # Generated blog examples
-├── blog_post_2.md
-├── blog_post_3.md
-│
-├── generate_blog.py         # Main script to generate blog posts
-├── topics_python.py         # Optional Python topic generator
-├── topics.json              # Topics list in JSON
-├── requirements.txt         # Python dependencies
 ├── LICENSE
-└── README.md
-
-
-````
-
-## 🚀 Getting Started
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/edilma/AI-Agent-Orchestrator.git
-cd blog_generator_project
-````
-
-### 2. Set Up a Virtual Environment
-
-```bash
-python -m venv venv
-# Activate the environment
-# On Windows:
-.\venv\Scripts\activate
-# On macOS/Linux:
-source venv/bin/activate
+├── README.md
+├── requirements.txt
+└── setup.py
 ```
 
-### 3. Install Dependencies
+## 🚀 Installation
+
+Install the framework directly from GitHub using pip:
 
 ```bash
-pip install -r requirements.txt
+pip install git+https://github.com/edilma/AI-Agent-Orchestrator.git
 ```
 
-### 4. Run the Blog Generator
+## ✍️ Basic Usage
 
-```bash
-python generate_blog.py
+Here is a simple example of how to import and use the framework in your own Python script.
+
+**Prerequisite:** You must have your LLM API key (e.g., `OPENAI_API_KEY`) set as an environment variable for the agents to function.
+
+```python
+import os
+from blog_agent_framework import generate_blog_post_with_review
+
+# Example of setting the environment variable in your script
+# os.environ["OPENAI_API_KEY"] = "sk-YourSecretKey"
+
+# 1. Define a topic for the blog post
+topic = "The Future of Renewable Energy and its Impact on the Global Economy"
+
+# 2. Call the main generation function
+print("Generating blog post... this may take a few minutes.")
+final_post = generate_blog_post_with_review(topic)
+
+# 3. Print the final, reviewed article
+print("\n--- Final Blog Post ---")
+print(final_post)
+
 ```
-
-This will create new blog posts using the agents and save them as Markdown files.
-
-## ✍️ Customization
-
-* Add topics to `topics.json` or edit `topics_python.py` if generating topics programmatically.
-* You can modify agent behavior in `agents/`.
 
 ## 📜 License
 
-This project is licensed under the terms of the [MIT License](LICENSE).
+This project is licensed under the terms of the [MIT License](https://www.google.com/search?q=LICENSE).
 
 ## ✨ Author
 
