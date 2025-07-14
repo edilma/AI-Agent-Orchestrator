@@ -1,6 +1,8 @@
 #fill template to create a setup.py file for a Python package
 from setuptools import setup, find_packages
 
+with open('requirements.txt', encoding='utf-8') as f:
+    requirements = f.read().splitlines()
 setup(
     name="blog_agent_framework",
     version="0.1.0",
