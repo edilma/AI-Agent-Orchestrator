@@ -1,6 +1,5 @@
 import autogen
-
-llm_config = {"model": "gpt-3.5-turbo"}
+from ..config import llm_config
 
 def create_writer():
     writer = autogen.AssistantAgent(

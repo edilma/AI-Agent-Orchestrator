@@ -1,6 +1,6 @@
 import autogen
+from ..config import llm_config
 
-llm_config = {"model": "gpt-3.5-turbo"}
 
 def create_critic():
     critic = autogen.AssistantAgent(

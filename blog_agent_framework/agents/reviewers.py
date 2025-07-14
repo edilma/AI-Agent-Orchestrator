@@ -1,8 +1,5 @@
 import autogen
-
-#checking if the git ignore is tracking this 
-
-llm_config = {"model": "gpt-3.5-turbo"}
+from ..config import llm_config
 
 def create_seo_reviewer():
     return autogen.AssistantAgent(
