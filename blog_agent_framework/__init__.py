@@ -5,6 +5,11 @@ from .utils.helpers import create_task, save_blog_post
 from .agents.reviewers import create_digital_marketer_reviewer, create_seo_reviewer, create_legal_reviewer, create_meta_reviewer
 
 
+def reflection_message(recipient, messages, sender, config):
+    return f'''Review the following content.
+
+{recipient.chat_messages_for_summary(sender)[-1]['content']}'''
+
 # Function to generate a blog post with nested reviewers
 def generate_blog_post_with_review(topic):
     writer = create_writer()
