@@ -1,8 +1,8 @@
 import json
-from agents.writer import create_writer
-from agents.critic import create_critic
-from utils.helpers import create_task, save_blog_post
-from agents.reviewers import create_digital_marketer_reviewer, create_seo_reviewer, create_legal_reviewer, create_meta_reviewer
+from .agents.writer import create_writer
+from .agents.critic import create_critic
+from .utils.helpers import create_task, save_blog_post
+from .agents.reviewers import create_digital_marketer_reviewer, create_seo_reviewer, create_legal_reviewer, create_meta_reviewer
 
 
 # Function to generate a blog post with nested reviewers
