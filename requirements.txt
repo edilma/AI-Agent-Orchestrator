@@ -1,7 +1,8 @@
 ## I have all this libraries installed in my environment
 ## pip install requirements.txt if not using the environment
 
-pyautogen>=0.2.25
+autogen-agentchat
+openai
 chess==1.10.0
 matplotlib
 numpy
