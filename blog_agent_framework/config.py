@@ -1,17 +1,13 @@
 import os
 
-
+# Get the API key from the environment once.
 api_key = os.getenv("OPENAI_API_KEY")
 
-# --- THIS IS THE DEBUGGING LINE ---
-print(f"--- DEBUG: Key loaded from environment: [{api_key}] ---")
-# ------------------------------------
-
-
+# Define a list that contains your model configuration.
 config_list_openai = [
     {
         "model": "gpt-3.5-turbo",
-        "api_key": os.getenv("OPENAI_API_KEY"),
+        "api_key": api_key,  
     }
 ]
 
