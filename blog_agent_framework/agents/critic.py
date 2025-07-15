@@ -1,8 +1,6 @@
 import autogen
-from ..config import llm_config
 
-
-def create_critic():
+def create_critic(llm_config):
     critic = autogen.AssistantAgent(
         name="Critic",
         is_termination_msg=lambda x: x.get("content", "").find("TERMINATE") >= 0,

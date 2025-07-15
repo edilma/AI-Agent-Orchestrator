@@ -1,3 +1,4 @@
+import os
 import json
 from .agents.writer import create_writer
 from .agents.critic import create_critic
@@ -11,7 +12,19 @@ def reflection_message(recipient, messages, sender, config):
 {recipient.chat_messages_for_summary(sender)[-1]['content']}'''
 
 # Function to generate a blog post with nested reviewers
-def generate_blog_post_with_review(topic):
+def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
+     # Dynamically create the config list using the 'model' parameter
+    config_list_openai = [
+        {
+            "model": model,
+            "api_key": os.getenv("OPENAI_API_KEY"),
+            "project": os.getenv("OPENAI_PROJECT_ID"),
+        }
+    ]
+    llm_config = {
+        "config_list": config_list_openai,
+        "cache_seed": 42
+    }
     writer = create_writer()
     critic = create_critic()
     digital_marketer_reviewer = create_digital_marketer_reviewer()

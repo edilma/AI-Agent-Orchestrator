@@ -1,7 +1,6 @@
 import autogen
-from ..config import llm_config
 
-def create_writer():
+def create_writer(llm_config):
     writer = autogen.AssistantAgent(
         name="Writer",
         system_message="You are a writer. You write engaging and concise " 

@@ -1,7 +1,6 @@
 import autogen
-from ..config import llm_config
 
-def create_seo_reviewer():
+def create_seo_reviewer(llm_config):
     return autogen.AssistantAgent(
         name="SEO Reviewer",
         system_message="You are an SEO reviewer, known for "
@@ -13,7 +12,7 @@ def create_seo_reviewer():
         llm_config=llm_config,
     )
 
-def create_legal_reviewer():
+def create_legal_reviewer(llm_config):
     return autogen.AssistantAgent(
         name="Legal Reviewer",
         system_message="You are a legal reviewer, known for "
@@ -25,7 +24,7 @@ def create_legal_reviewer():
         llm_config=llm_config,
     )
 
-def create_digital_marketer_reviewer():
+def create_digital_marketer_reviewer(llm_config):
     return autogen.AssistantAgent(
         name="Digital and Content Marketer",
         system_message=
@@ -50,19 +49,7 @@ def create_digital_marketer_reviewer():
     )
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-def marketer_reviewer():
+def marketer_reviewer(llm_config):
     return autogen.AssistantAgent(
         name="digital and content marketer",
         system_message= "You are a seasoned digital marketer"
@@ -75,7 +62,7 @@ def marketer_reviewer():
     )
 
 
-def create_meta_reviewer():
+def create_meta_reviewer(llm_config):
     return autogen.AssistantAgent(
         name="Meta Reviewer",
         system_message= "You are a meta reviewer, you aggragate and review "
