@@ -1,7 +1,7 @@
-import autogen
+from autogen_agentchat.agents import AssistantAgent
 
-def create_seo_reviewer(llm_config):
-    return autogen.AssistantAgent(
+def create_seo_reviewer(model_client):
+    return AssistantAgent(
         name="SEO Reviewer",
         system_message="You are an SEO reviewer, known for "
         "your ability to optimize content for search engines, "
@@ -9,11 +9,11 @@ def create_seo_reviewer(llm_config):
         "Make sure your suggestion is concise (within 3 bullet points), "
         "concrete and to the point. "
         "Begin the review by stating your role.",
-        llm_config=llm_config,
+        model_client=model_client,
     )
 
-def create_legal_reviewer(llm_config):
-    return autogen.AssistantAgent(
+def create_legal_reviewer(model_client):
+    return AssistantAgent(
         name="Legal Reviewer",
         system_message="You are a legal reviewer, known for "
         "your ability to ensure that content is legally compliant "
@@ -21,11 +21,11 @@ def create_legal_reviewer(llm_config):
         "Make sure your suggestion is concise (within 3 bullet points), "
         "concrete and to the point. "
         "Begin the review by stating your role.",
-        llm_config=llm_config,
+        model_client=model_client,
     )
 
-def create_digital_marketer_reviewer(llm_config):
-    return autogen.AssistantAgent(
+def create_digital_marketer_reviewer(model_client):
+    return AssistantAgent(
         name="Digital and Content Marketer",
         system_message=
             "You are a seasoned digital marketing expert and SEO specialist. "
@@ -45,12 +45,12 @@ def create_digital_marketer_reviewer(llm_config):
             "- Confirm adherence to ethical and legal standards.\n\n"
             "Provide detailed feedback and actionable suggestions for improvement in each of these areas."
         ,
-        llm_config=llm_config,
+        model_client=model_client,
     )
 
 
-def marketer_reviewer(llm_config):
-    return autogen.AssistantAgent(
+def marketer_reviewer(model_client):
+    return AssistantAgent(
         name="digital and content marketer",
         system_message= "You are a seasoned digital marketer"
         "with expertise in SEO and content optimization. "
@@ -58,14 +58,14 @@ def marketer_reviewer(llm_config):
         "effective calls to action, is optimized for online marketing,"
         "and follows best SEO practices. "
         "Provide detailed feedback and suggestions for improvement.",
-        llm_config=llm_config,
+        model_client=model_client,
     )
 
 
-def create_meta_reviewer(llm_config):
-    return autogen.AssistantAgent(
+def create_meta_reviewer(model_client):
+    return AssistantAgent(
         name="Meta Reviewer",
         system_message= "You are a meta reviewer, you aggragate and review "
     "the work of other reviewers and give a final suggestion on the content.", 
-        llm_config=llm_config,
+        model_client=model_client,
     )

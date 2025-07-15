@@ -2,6 +2,7 @@
 ## pip install requirements.txt if not using the environment
 
 autogen-agentchat
+autogen-ext[openai]
 openai
 chess==1.10.0
 matplotlib

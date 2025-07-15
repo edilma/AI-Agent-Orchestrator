@@ -1,85 +1,61 @@
 import os
-import json
+from .config import create_model_client
 from .agents.writer import create_writer
 from .agents.critic import create_critic
-from .utils.helpers import create_task, save_blog_post
-from .agents.reviewers import create_digital_marketer_reviewer, create_seo_reviewer, create_legal_reviewer, create_meta_reviewer
+from .agents.reviewers import (
+    create_digital_marketer_reviewer,
+    create_seo_reviewer,
+    create_legal_reviewer,
+    create_meta_reviewer,
+)
+# Import the new GroupChat components
+from autogen_agentchat.groups import GroupChat, GroupChatManager
 
-
-def reflection_message(recipient, messages, sender, config):
-    return f'''Review the following content.
-
-{recipient.chat_messages_for_summary(sender)[-1]['content']}'''
-
-# Function to generate a blog post with nested reviewers
+# The main function, refactored for the new Autogen version
 def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
-     # Dynamically create the config list using the 'model' parameter
-    config_list_openai = [
-        {
-            "model": model,
-            "api_key": os.getenv("OPENAI_API_KEY"),
-            "project": os.getenv("OPENAI_PROJECT_ID"),
-        }
-    ]
-    llm_config = {
-        "config_list": config_list_openai,
-        "cache_seed": 42
-    }
-    writer = create_writer()
-    critic = create_critic()
-    digital_marketer_reviewer = create_digital_marketer_reviewer()
-    legal_reviewer = create_legal_reviewer()
-    seo_reviewer = create_seo_reviewer()
-    meta_reviewer = create_meta_reviewer()
+    # 1. Create the model client
+    model_client = create_model_client(model=model)
 
-    task = create_task(topic)
-    reply = writer.generate_reply(messages=[{"content": task, "role": "user"}])
+    # 2. Create all the agents by passing the model client
+    writer = create_writer(model_client)
+    critic = create_critic(model_client)
+    digital_marketer_reviewer = create_digital_marketer_reviewer(model_client)
+    legal_reviewer = create_legal_reviewer(model_client)
+    seo_reviewer = create_seo_reviewer(model_client)
+    meta_reviewer = create_meta_reviewer(model_client)
 
-    # Define the nested review process
-    review_chats = [
-        {
-        "recipient": legal_reviewer, 
-         "message": reflection_message, 
-         "summary_method": "reflection_with_llm",
-         "summary_args": {
-            "summary_prompt" : "Return review into as JSON object only:{'Reviewer': '', 'Review': ''}.",
-         },
-         "max_turns": 1
-        },
-        {
-        "recipient": digital_marketer_reviewer, 
-         "message": reflection_message, 
-         "summary_method": "reflection_with_llm",
-         "summary_args": {
-            "summary_prompt" : "Return review into as JSON object only:{'Reviewer': '', 'Review': ''}",
-         },
-         "max_turns": 1
-        },
-                {
-            "recipient": seo_reviewer, 
-            "message": reflection_message, 
-            "summary_method": "reflection_with_llm",
-            "summary_args": {
-                "summary_prompt" : "Return review into as JSON object only:{'Reviewer': '', 'Review': ''}",
-            },
-            "max_turns": 1
-        },
-        {
-         "recipient": meta_reviewer, 
-         "message": "Aggregate feedback from all reviewers and give final suggestions on the writing.", 
-         "max_turns": 1
-        }
+    # 3. Define the list of agents for the group chat
+    agent_list = [
+        writer,
+        critic,
+        digital_marketer_reviewer,
+        legal_reviewer,
+        seo_reviewer,
+        meta_reviewer,
     ]
 
-       # Register the nested review chats 
-    critic.register_nested_chats(review_chats, trigger=writer)
-
-    # Critic reviews the post and initiates nested reviews
-    res = critic.initiate_chat(
-        recipient=writer,
-        message=task,
-        max_turns=2,
-        summary_method="last_msg"
+    # 4. Create the GroupChat object
+    group_chat = GroupChat(
+        agents=agent_list,
+        messages=[],
+        max_round=10,
+        # The 'speaker_selection_method' can be customized for more complex workflows
+        speaker_selection_method="auto" 
     )
 
-    return res.summary
+    # 5. Create the GroupChatManager
+    # This agent manages the conversation flow in the group chat
+    group_chat_manager = GroupChatManager(
+        groupchat=group_chat, 
+        model_client=model_client
+    )
+
+    # 6. Start the conversation
+    # The writer agent initiates the chat with the manager, providing the topic
+    chat_result = writer.run(
+        recipient=group_chat_manager, 
+        task=f"Write a blog post about the following topic: {topic}"
+    )
+
+    # 7. Return the summary of the chat, which should be the final post
+    return chat_result.summary
