@@ -3,7 +3,7 @@
 
 # Blog Agent Framework
 
-An advanced framework for building AI-powered content generation pipelines. This project uses a multi-agent system, powered by **Microsoft Autogen**, to autonomously write, critique, and review articles for quality, compliance, and SEO.
+An advanced framework for building AI-powered content generation pipelines. This project uses a multi-agent system, powered by **Microsoft Autogen**, latest version, to autonomously write, critique, and review articles for quality, compliance, and SEO.
 
 ## 🔧 Features
 
