@@ -26,7 +26,7 @@ def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
 
    # 3. Create the SelectorGroupChat team
     team = SelectorGroupChat(
-        agents=[
+        [
             writer,
             critic,
             digital_marketer_reviewer,
