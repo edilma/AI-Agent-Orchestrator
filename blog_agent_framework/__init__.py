@@ -12,7 +12,7 @@ from .agents.reviewers import (
 from autogen_agentchat.teams import SelectorGroupChat
 
 # The main function, refactored for the new Autogen version
-def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
+async def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
     # 1. Create the model client
     model_client = create_model_client(model=model)
 
@@ -39,7 +39,7 @@ def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
 
      # 4. Run the chat
     # The new, simpler way to start and run the entire conversation
-    chat_result = team.run(
+    chat_result = await team.run(
         task=f"Write a blog post about the following topic: {topic}. Get feedback and reviews, then provide the final version."
     )
 
