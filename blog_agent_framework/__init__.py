@@ -8,8 +8,8 @@ from .agents.reviewers import (
     create_legal_reviewer,
     create_meta_reviewer,
 )
-# Import the new GroupChat components
-from autogen_agentchat import GroupChat, GroupChatManager
+# Import from the new 'teams' module
+from autogen_agentchat.teams import SelectorGroupChat
 
 # The main function, refactored for the new Autogen version
 def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
@@ -24,38 +24,24 @@ def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
     seo_reviewer = create_seo_reviewer(model_client)
     meta_reviewer = create_meta_reviewer(model_client)
 
-    # 3. Define the list of agents for the group chat
-    agent_list = [
-        writer,
-        critic,
-        digital_marketer_reviewer,
-        legal_reviewer,
-        seo_reviewer,
-        meta_reviewer,
-    ]
-
-    # 4. Create the GroupChat object
-    group_chat = GroupChat(
-        agents=agent_list,
-        messages=[],
-        max_round=10,
-        # The 'speaker_selection_method' can be customized for more complex workflows
-        speaker_selection_method="auto" 
+   # 3. Create the SelectorGroupChat team
+    team = SelectorGroupChat(
+        agents=[
+            writer,
+            critic,
+            digital_marketer_reviewer,
+            legal_reviewer,
+            seo_reviewer,
+            meta_reviewer,
+        ],
+        model_client=model_client,
     )
 
-    # 5. Create the GroupChatManager
-    # This agent manages the conversation flow in the group chat
-    group_chat_manager = GroupChatManager(
-        groupchat=group_chat, 
-        model_client=model_client
+     # 4. Run the chat
+    # The new, simpler way to start and run the entire conversation
+    chat_result = team.run(
+        task=f"Write a blog post about the following topic: {topic}. Get feedback and reviews, then provide the final version."
     )
 
-    # 6. Start the conversation
-    # The writer agent initiates the chat with the manager, providing the topic
-    chat_result = writer.run(
-        recipient=group_chat_manager, 
-        task=f"Write a blog post about the following topic: {topic}"
-    )
-
-    # 7. Return the summary of the chat, which should be the final post
+    # 5. Return the summary
     return chat_result.summary
