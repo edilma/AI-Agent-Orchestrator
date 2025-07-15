@@ -9,7 +9,7 @@ from .agents.reviewers import (
     create_meta_reviewer,
 )
 # Import the new GroupChat components
-from autogen_agentchat.groups import GroupChat, GroupChatManager
+from autogen_agentchat import GroupChat, GroupChatManager
 
 # The main function, refactored for the new Autogen version
 def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
