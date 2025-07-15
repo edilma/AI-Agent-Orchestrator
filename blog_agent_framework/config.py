@@ -1,10 +1,14 @@
 import os
 
-# Get the API key from environment variables
-api_key = os.getenv("OPENAI_API_KEY")
+config_list_openai = [
+    {
+        "model": "gpt-3.5-turbo",
+        "api_key": os.getenv("OPENAI_API_KEY"),
+    }
+]
 
-# Set up the LLM configuration
+# The llm_config that will be passed to your agents
 llm_config = {
-    "model": "gpt-3.5-turbo",
-    "api_key": api_key
+    "config_list": config_list_openai,
+    "cache_seed": 42  # Use a seed for caching and reproducibility
 }
