@@ -1,4 +1,5 @@
 import os
+import asyncio
 from .config import create_model_client
 from .agents.writer import create_writer
 from .agents.critic import create_critic
@@ -8,15 +9,13 @@ from .agents.reviewers import (
     create_legal_reviewer,
     create_meta_reviewer,
 )
-# Import from the new 'teams' module
+
 from autogen_agentchat.teams import SelectorGroupChat
+from autogen_agentchat.conditions import TextMentionTermination
 
-# The main function, refactored for the new Autogen version
+# The main function, refactored for the new Autogen version using async selector group chat
 async def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
-    # 1. Create the model client
     model_client = create_model_client(model=model)
-
-    # 2. Create all the agents by passing the model client
     writer = create_writer(model_client)
     critic = create_critic(model_client)
     digital_marketer_reviewer = create_digital_marketer_reviewer(model_client)
@@ -24,7 +23,10 @@ async def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
     seo_reviewer = create_seo_reviewer(model_client)
     meta_reviewer = create_meta_reviewer(model_client)
 
-   # 3. Create the SelectorGroupChat team
+    # Create a termination condition
+    # This will stop the chat when any agent says the word "TERMINATE"
+    termination_condition = TextMentionTermination(mention="TERMINATE")
+
     team = SelectorGroupChat(
         [
             writer,
@@ -35,13 +37,15 @@ async def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
             meta_reviewer,
         ],
         model_client=model_client,
+       
+        termination_condition=termination_condition,
     )
 
-     # 4. Run the chat
-    # The new, simpler way to start and run the entire conversation
     chat_result = await team.run(
-        task=f"Write a blog post about the following topic: {topic}. Get feedback and reviews, then provide the final version."
+        task=f"Write a blog post about the following topic: {topic}. Get feedback and reviews, then provide the final, refined version. Conclude your final message with the word TERMINATE."
     )
-
-    # 5. Return the summary
-    return chat_result.summary
+    
+    # Return the content of the very last message in the chat
+    if chat_result.messages:
+        return chat_result.messages[-1].content
+    return "No result was generated."
