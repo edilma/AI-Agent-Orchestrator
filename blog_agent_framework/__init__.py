@@ -40,9 +40,18 @@ async def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
         model_client=model_client,
         termination_condition=termination_condition,
     )
-
+    
     chat_result = await team.run(
         task=f"Generate a complete, reviewed, and finalized blog post on the topic: {topic}."
     )
-    
-    return chat_result.summary
+    # --- ADD THESE DEBUGGING LINES ---
+    print("\n--- DEBUG: Full Chat Result Object ---")
+    print(chat_result)
+    print("--------------------------------------\n")
+    # -----------------------------------
+
+    if chat_result.messages and len(chat_result.messages) > 1:
+        return chat_result.messages[-2].content
+
+
+    return "No result was generated."
