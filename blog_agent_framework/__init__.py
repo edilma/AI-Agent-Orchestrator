@@ -9,11 +9,11 @@ from .agents.reviewers import (
     create_legal_reviewer,
     create_meta_reviewer,
 )
-
+# Use the correct import paths based on your research
 from autogen_agentchat.teams import SelectorGroupChat
 from autogen_agentchat.conditions import TextMentionTermination
 
-# The main function, refactored for the new Autogen version using async selector group chat
+
 async def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
     model_client = create_model_client(model=model)
     writer = create_writer(model_client)
@@ -23,9 +23,11 @@ async def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
     seo_reviewer = create_seo_reviewer(model_client)
     meta_reviewer = create_meta_reviewer(model_client)
 
-    # Create a termination condition
-    # This will stop the chat when any agent says the word "TERMINATE"
-    termination_condition = TextMentionTermination("TERMINATE")
+    # Use your new, more robust termination phrase
+    # The chat will only end when the 'writer' agent's message includes this phrase
+    termination_condition = TextMentionTermination(
+        trigger=writer, mention="END_OF_BLOG_POST"
+    )
 
     team = SelectorGroupChat(
         [
@@ -37,15 +39,20 @@ async def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
             meta_reviewer,
         ],
         model_client=model_client,
-       
         termination_condition=termination_condition,
     )
 
+    # Update the task to instruct the writer to use the new phrase
     chat_result = await team.run(
-        task=f"Write a blog post about the following topic: {topic}. Get feedback and reviews, then provide the final, refined version. Conclude your final message with the word TERMINATE."
+        task=f"Generate a complete, reviewed, and finalized blog post on the topic: {topic}. The writer must conclude the final message with the exact phrase END_OF_BLOG_POST."
     )
     
-    # Return the content of the very last message in the chat
     if chat_result.messages:
-        return chat_result.messages[-1].content
+        # Return the content of the second to last message, which should be the final post
+        # The very last message will just be the termination phrase.
+        if len(chat_result.messages) > 1:
+            return chat_result.messages[-2].content
+        else:
+            return chat_result.messages[-1].content
+            
     return "No result was generated."
