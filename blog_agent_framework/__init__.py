@@ -41,9 +41,8 @@ async def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
         termination_condition=termination_condition,
     )
 
-    # Update the task to instruct the writer to use the new phrase
     chat_result = await team.run(
-        task=f"Generate a complete, reviewed, and finalized blog post on the topic: {topic}. The writer must conclude the final message with the exact phrase END_OF_BLOG_POST."
+        task=f"Generate a complete, reviewed, and finalized blog post on the topic: {topic}."
     )
     
     return chat_result.summary
