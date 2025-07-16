@@ -25,10 +25,9 @@ async def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
 
     # Use your new, more robust termination phrase
     # The chat will only end when the 'writer' agent's message includes this phrase
-    termination_condition = TextMentionTermination(
-        trigger=writer, mention="END_OF_BLOG_POST"
-    )
-
+    
+    termination_condition = TextMentionTermination(text="END_OF_BLOG_POST", sources=[writer.name])
+    # Create a SelectorGroupChat with all agents
     team = SelectorGroupChat(
         [
             writer,
