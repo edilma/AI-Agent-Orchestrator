@@ -26,7 +26,7 @@ async def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
     # Use your new, more robust termination phrase
     # The chat will only end when the 'writer' agent's message includes this phrase
     
-    termination_condition = TextMentionTermination(text="END_OF_BLOG_POST", sources=[writer.name])
+    termination_condition = TextMentionTermination(text="END_OF_BLOG_POST", sources=[meta_reviewer.name])
     # Create a SelectorGroupChat with all agents
     team = SelectorGroupChat(
         [
@@ -46,12 +46,4 @@ async def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
         task=f"Generate a complete, reviewed, and finalized blog post on the topic: {topic}. The writer must conclude the final message with the exact phrase END_OF_BLOG_POST."
     )
     
-    if chat_result.messages:
-        # Return the content of the second to last message, which should be the final post
-        # The very last message will just be the termination phrase.
-        if len(chat_result.messages) > 1:
-            return chat_result.messages[-2].content
-        else:
-            return chat_result.messages[-1].content
-            
-    return "No result was generated."
+    return chat_result.summary

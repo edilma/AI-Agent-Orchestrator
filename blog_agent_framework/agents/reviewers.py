@@ -62,10 +62,11 @@ def marketer_reviewer(model_client):
     )
 
 
+
 def create_meta_reviewer(model_client):
     return AssistantAgent(
         name="Meta_Reviewer",
-        system_message= "You are a meta reviewer, you aggregate and review "
-    "the work of other reviewers and give a final suggestion on the content.", 
         model_client=model_client,
+        # Give it the new instructions
+        system_message="You are the final meta-reviewer. Your job is to read all the feedback from the other reviewers, aggregate it, and provide a final, conclusive set of suggestions to the writer. After giving your feedback, you MUST conclude your message with the exact phrase: END_OF_BLOG_POST"
     )
