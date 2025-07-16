@@ -25,7 +25,7 @@ async def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
 
     # Create a termination condition
     # This will stop the chat when any agent says the word "TERMINATE"
-    termination_condition = TextMentionTermination(mention="TERMINATE")
+    termination_condition = TextMentionTermination("TERMINATE")
 
     team = SelectorGroupChat(
         [
