@@ -8,7 +8,6 @@ from .agents.reviewers import (
 )
 
 #function that will generate a blog post with reviews
-#This function will create a team of agents, including the writer, critic, and various reviewers
 async def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
     #1. create all agents
     model_client = create_model_client(model=model)
@@ -22,7 +21,6 @@ async def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
     task=f"Write a blog post about '{topic}'. Make sure the post is concise, engaging, and stays within 300 words."
 
     #2. writer creates the first draft of the blog post
-    print("--- Step 1: Writer creating first draft ---")
     draft_result = await writer.run(task=task)
     # Check if the writer's initial draft was successful
     if not draft_result or not draft_result.messages:
@@ -32,7 +30,6 @@ async def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
     first_draft = draft_result.messages[-1].content
 
     #3. Reviewers provide feedback on the first draft
-    print("--- Step 2: Collecting reviews ---")
     reviews =[]
     reviewers = [
         content_marketer,
@@ -46,7 +43,6 @@ async def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
             reviews.append(f"Feedback from {reviewer.name}:\n{review_result.messages[-1].content}\n")
 
     #4.  The critic summarizes the feedback and delivers it to the writer
-    print("--- Step 3: Critic summarizing and delivering feedback ---")
     all_reviews = "\n".join(reviews)
     critic_task = f"You are the critic. Your job is to summarize the following feedback and present a final, clear set of suggestions to the writer:\n\n{all_reviews}"
     final_feedback_result = await critic.run(task=critic_task)
@@ -56,7 +52,6 @@ async def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
         return "The critic did not provide feedback."
     
     # 5 Writer creates final version
-    print("--- Step 4: Writer creating final version ---")
     revision_task = f"Please revise your first draft based on the following feedback. Produce only the final, complete blog post.\n\nDraft:\n{first_draft}\n\nFeedback:\n{aggregated_feedback}"
     final_post_result = await writer.run(task=revision_task)
 
@@ -64,6 +59,5 @@ async def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
     if not final_post_result or not final_post_result.messages:
         return "The writer did not produce a final version."
     # The final version is the last message from the writer
-    print("--- Step 5: Final version from writer ---")
     final_post = final_post_result.messages[-1].content
     return final_post
