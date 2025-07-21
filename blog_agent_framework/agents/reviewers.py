@@ -12,61 +12,62 @@ def create_seo_reviewer(model_client):
         model_client=model_client,
     )
 
-def create_legal_reviewer(model_client):
+def create_content_marketer_reviewer(model_client):
     return AssistantAgent(
-        name="Legal_Reviewer",
-        system_message="You are a legal reviewer, known for "
-        "your ability to ensure that content is legally compliant "
-        "and free from any potential legal issues. "
-        "Make sure your suggestion is concise (within 3 bullet points), "
-        "concrete and to the point. "
-        "Begin the review by stating your role.",
+        name="Content_Marketer_Reviewer",
+        system_message=(
+            "You are a senior content marketing expert. "
+            "Your job is to review blog posts to ensure they are engaging, optimized for search engines, and suitable for the intended audience. "
+            "The writing should be clear, easy to follow, and structured in a way that holds the reader's interest. "
+            "Assume the blog is for general public readers. Do not assume any specific marketing goal. "
+            "Instead, focus on readability, clarity, structure, and discoverability. "
+            "\n\n"
+            "Provide concise, actionable feedback in 3 sections:\n\n"
+            "**1. Content Structure & Engagement**\n"
+            "- Is the post broken into short, scannable sections or bullet points?\n"
+            "- Is it written like a story or does it flow logically from beginning to end?\n"
+            "- Does the ending leave the reader curious, thoughtful, or wanting more?\n\n"
+            "**2. SEO Readiness**\n"
+            "- Are keywords used naturally without overstuffing?\n"
+            "- Are the title and headings clear and relevant?\n"
+            "- Would this content help someone searching for the topic?\n\n"
+            "**3. Reader Value**\n"
+            "- Is the blog relevant, informative, or entertaining for a general audience?\n"
+            "- Does it feel complete and purposeful, even without a formal CTA?"
+        ),
         model_client=model_client,
     )
 
-def create_digital_marketer_reviewer(model_client):
+def create_clarity_and_ethics_reviewer(model_client):
     return AssistantAgent(
-        name="Digital_Marketer",
-        system_message=
-            "You are a seasoned digital marketing expert and SEO specialist. "
-            "Your role is to review blog posts for marketing effectiveness, SEO optimization, and content quality. "
-            "Please ensure that the blog post includes:\n\n"
-            "**1. Effective Calls to Action (CTAs):**\n"
-            "- Verify the presence of clear and compelling CTAs that encourage the desired user action.\n"
-            "- Assess the placement and frequency of CTAs within the content.\n"
-            "- Ensure CTAs align with the content topic and audience needs.\n\n"
-            "**2. SEO Optimization:**\n"
-            "- Check for the natural integration of relevant keywords and phrases.\n"
-            "- Evaluate meta descriptions, title tags, header tags, and image alt texts.\n"
-            "- Assess content readability, structure, and use of headings and subheadings.\n\n"
-            "**3. Content Quality and Engagement:**\n"
-            "- Ensure the content is original, relevant, and valuable to the target audience.\n"
-            "- Verify that the tone and style are appropriate and engaging.\n"
-            "- Confirm adherence to ethical and legal standards.\n\n"
-            "Provide detailed feedback and actionable suggestions for improvement in each of these areas."
-        ,
+        name="Clarity_and_Ethics_Reviewer",
+        system_message=(
+            "You are a clarity and ethics reviewer for blog content written for the general public. "
+            "Your role is to ensure the writing is easy to understand, inclusive, respectful, and appropriate for a wide audience. "
+            "Assume that readers may have only an elementary school education. "
+            "Avoid making assumptions about the blog's topic or purpose—focus only on readability and tone. "
+            "\n\n"
+            "Please provide clear and helpful feedback in 3-5 bullet points, addressing:\n"
+            "- **Clarity**: Are all sentences short and easy to understand? Is vocabulary appropriate for a general audience?\n"
+            "- **Tone**: Is the tone friendly, respectful, and emotionally appropriate?\n"
+            "- **Bias or Confusion**: Are there any unclear, exclusionary, or potentially offensive phrases?\n"
+            "- **Suggestions**: Point out anything that could be rewritten for better simplicity, clarity, or inclusivity."
+        ),
         model_client=model_client,
     )
-
-
-def marketer_reviewer(model_client):
-    return AssistantAgent(
-        name="digital_and_content_marketer",
-        system_message= "You are a seasoned digital marketer"
-        "with expertise in SEO and content optimization. "
-        "Review the following blog post to ensure it includes"
-        "effective calls to action, is optimized for online marketing,"
-        "and follows best SEO practices. "
-        "Provide detailed feedback and suggestions for improvement.",
-        model_client=model_client,
-    )
-
-
 
 def create_meta_reviewer(model_client):
     return AssistantAgent(
         name="Meta_Reviewer",
         model_client=model_client,
-        # Give it the new instructions
-        system_message="You are the final meta-reviewer. Your job is to read all the feedback from the other reviewers, aggregate it, and provide a final, conclusive set of suggestions to the writer. After giving your feedback, you MUST conclude your message with the exact phrase: END_OF_BLOG_POST"
+        system_message=
+            "You are the final meta-reviewer in a blog writing workflow. "
+            "Your job is to read and synthesize all feedback from the other reviewers "
+            "(including SEO, content marketing, clarity, ethics, and criticism). "
+            "Summarize the most important and actionable suggestions for the writer. "
+            "Do not repeat conflicting or redundant comments—only include what truly improves the blog. "
+            "Assume the blog is written for a general audience with an elementary-level reading ability. "
+            "\n\n"
+            "At the end of your message, include the exact phrase: END_OF_BLOG_POST"
+        
     )

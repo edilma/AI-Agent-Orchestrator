@@ -4,10 +4,10 @@ from .config import create_model_client
 from .agents.writer import create_writer
 from .agents.critic import create_critic
 from .agents.reviewers import (
-    create_digital_marketer_reviewer,
+    create_content_marketer_reviewer,
     create_seo_reviewer,
-    create_legal_reviewer,
-    create_meta_reviewer,
+    create_clarity_and_ethics_reviewer,
+    create_meta_reviewer
 )
 
 from autogen_agentchat.teams import SelectorGroupChat
@@ -19,12 +19,11 @@ async def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
     model_client = create_model_client(model=model)
     writer = create_writer(model_client)
     critic = create_critic(model_client)
-    digital_marketer_reviewer = create_digital_marketer_reviewer(model_client)
-    legal_reviewer = create_legal_reviewer(model_client)
     seo_reviewer = create_seo_reviewer(model_client)
+    content_marketer = create_content_marketer_reviewer(model_client)
+    clarity_and_ethics_reviewer = create_clarity_and_ethics_reviewer(model_client)
     meta_reviewer = create_meta_reviewer(model_client)
 
-    # Set the termination condition for the team
     # The meta reviewer will signal the end of the blog post review process
     termination_condition = TextMentionTermination(text="END_OF_BLOG_POST", sources=[meta_reviewer.name])
     
@@ -33,8 +32,8 @@ async def generate_blog_post_with_review(topic, model="gpt-3.5-turbo"):
         [
             writer,
             critic,
-            digital_marketer_reviewer,
-            legal_reviewer,
+            content_marketer,
+            clarity_and_ethics_reviewer,
             seo_reviewer,
             meta_reviewer,
         ],
