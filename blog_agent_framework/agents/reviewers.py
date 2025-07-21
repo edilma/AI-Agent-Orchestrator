@@ -55,19 +55,3 @@ def create_clarity_and_ethics_reviewer(model_client):
         ),
         model_client=model_client,
     )
-
-def create_meta_reviewer(model_client):
-    return AssistantAgent(
-        name="Meta_Reviewer",
-        model_client=model_client,
-        system_message=
-            "You are the final meta-reviewer in a blog writing workflow. "
-            "Your job is to read and synthesize all feedback from the other reviewers "
-            "(including SEO, content marketing, clarity, ethics, and criticism). "
-            "Summarize the most important and actionable suggestions for the writer. "
-            "Do not repeat conflicting or redundant comments—only include what truly improves the blog. "
-            "Assume the blog is written for a general audience with an elementary-level reading ability. "
-            "\n\n"
-            "At the end of your message, include the exact phrase: END_OF_BLOG_POST"
-        
-    )
