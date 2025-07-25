@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+# --- Basic Package Information ---
+name = "blog-agent-framework"
+version = "1.0.0"
+authors = [
+  { name="Edilma Riano", email="edilmadev@gmail.com" }, 
+]
+description = "A library for orchestrating a team of AI agents to generate high-quality blog posts."
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.11"
+
+# --- Keywords and Classifiers for PyPI ---
+# Helps users find your package on pypi.org
+keywords = ["ai", "autogen", "llm", "agent", "orchestrator", "blogging"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Text Processing :: General",
+]
+
+# --- Dependencies ---
+dependencies = [
+    "autogen-ext[openai]>=0.6.4"
+]
+
+[project.urls]
+Homepage = "https://github.com/edilma/AI-Blog-Project" 
+"Bug Tracker" = "https://github.com/edilma/AI-Blog-Project/issues" 
+
+# --- Optional Dependencies ---
+# For running examples or tests. Install with: pip install -e .[dev]
+[project.optional-dependencies]
+dev = [
+    "python-dotenv>=1.0.0",
+]
+
+
+# --- Package Discovery ---
+[tool.setuptools.packages.find]
+where = ["."]  # search in the root directory

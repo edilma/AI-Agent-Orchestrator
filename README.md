@@ -33,41 +33,56 @@ Install the framework directly from GitHub using pip:
 Bash
 
 pip install git+https://github.com/edilma/AI-Agent-Orchestrator.git
-✍️ Basic Usage
+
+## ✍️ Basic Usage
 Here is a simple example of how to import and use the framework in your own Python script.
 
-Prerequisite: You must have your OpenAI credentials set as environment variables. For modern project-based keys, this includes:
+### Running the Example
 
-OPENAI_API_KEY (starting with sk-proj-...)
+1. Navigate to the examples directory: cd examples
 
-OPENAI_PROJECT_ID (starting with proj-...)
+2. Install required packages: pip install python-dotenv (and any others needed for the example).
+
+3. Copy the environment template: cp .env.example .env
+
+4. Open the new .env file and add your OpenAI API key.
+
+5. Run the example: python run_example.py
 
 Python
 
-import asyncio
-import os
-from blog_agent_framework import generate_blog_post_with_review
 
 # This is an example of how you would run the async function
+```
+import asyncio
+import os
+from dotenv import load_dotenv
+from blog_agent_framework import Orchestrator
+
+# This line loads the variables from the .env file into the environment
+load_dotenv()
+
 async def main():
-    # Example of setting environment variables in a script
-    # In a real app, you would use a .env file
-    # os.environ["OPENAI_API_KEY"] = "sk-proj-YourSecretKey..."
-    # os.environ["OPENAI_PROJECT_ID"] = "proj-YourProjectId..."
+    # Now, your library can find the OPENAI_API_KEY automatically
+    # because it's loaded into the environment.
+    if not os.getenv("OPENAI_API_KEY"):
+        print("Error: OPENAI_API_KEY not found. Please create a .env file from .env.example and add your key.")
+        return
 
-    # 1. Define a topic for the blog post
-    topic = "The Benefits of a Mideterranean Diet"
+    topic = "The Future of Renewable Energy"
+    orchestrator = Orchestrator()
 
-    # 2. Call the main generation function using 'await'
-    print(f"Generating blog post for topic: '{topic}'... this may take a few minutes.")
-    final_post = await generate_blog_post_with_review(topic)
+    print(f"Generating post for topic: {topic}...")
+    final_post = await orchestrator.run_workflow(topic)
 
-    # 3. Print the final, reviewed article
-    print("\n--- Final Blog Post ---")
+    print("\n--- Generated Blog Post ---")
     print(final_post)
 
 if __name__ == "__main__":
     asyncio.run(main())
+
+```
+
 
 📜 License
 This project is licensed under the terms of the MIT License.
