@@ -10,6 +10,10 @@ venv/
 .cache*
 cache.db
 __pycache__/
+# Build artifacts
+dist/
+build/
+*.egg-info/
 
 # Generated content
 *.md

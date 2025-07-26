@@ -1,93 +1,119 @@
 # Blog Agent Framework
+📖 También disponible en [Español](README.es.md)
+
 An advanced framework for building AI-powered content generation pipelines. This project uses a multi-agent system, powered by Microsoft Autogen, to autonomously write, critique, and review articles for quality, compliance, and SEO.
+**Create smarter, better blogs—autonomously.**
+
+The **Blog Agent Framework** is a plug-and-play Python library that helps you generate high-quality blog posts using a team of AI agents. Built on top of Microsoft’s powerful [Autogen](https://microsoft.github.io/autogen) system, this framework mimics a professional content team: a writer, a critic, and multiple expert reviewers work together to craft concise, SEO-optimized, story-driven articles—designed to engage readers and rank well in search engines.  Applies best practices in digital marketing to improve the reach, structure, and impact of each post. 
+
+Whether you're a solo blogger, content marketer, or developer, you can use this library to automate content creation or integrate it into your own API.
+
+---
 
 ## 🔧 Features
-Modular Agent Architecture: Easily configurable agents for writing, legal review, marketing, and SEO.
+**🧩 Modular Agent Architecture**  
+    Includes specialized agents for:
+    - **Writer** – Crafts story-driven blog posts using simple, clear language  
+    - **Content Marketing Reviewer** – Improves structure, flow, and engagement  
+    - **Clarity & Ethics Reviewer** – Ensures content is easy to understand and free from misleading claims  
+    - **SEO Reviewer** – Optimizes for discoverability on search engines like Google and AI tools
 
-Flexible Orchestration: A modern group chat structure allows for complex and intelligent review loops.
+**💬 Intelligent Agent Collaboration**  
+    Each agent plays a focused role in a structured review loop, and a meta-agent brings everything together into one polished result.
 
-Installable as a Library: Designed to be used as a package in other Python applications.
+**📦 Use As a Library or API**  
+    - Use the library directly in your Python projects  
+    - Or build an API on top to serve real-time blog generation for your website or content service
 
-Extensible by Design: Add new agent roles and capabilities by extending the core classes.
+**✅ SEO-Friendly & Reader-Focused**  
+    Designed to help your content perform well on search engines *and* connect with real people—especially readers with a basic or general reading level.
 
 ## 📁 Project Structure
 The project is structured as a standard Python package, making it easy to install and use.
 
-```
-.
-├── blog_agent_framework/
-│   ├── __init__.py          # Exposes the main generation function
-│   ├── config.py            # Handles model client configuration
-│   ├── agents/
-│   └── utils/
-│
-├── LICENSE
-├── README.md
-├── requirements.txt
-└── setup.py
-```
+    ```
+    .
+    ├── blog_agent_framework/    # The main library source code
+    │   ├── agents/              # Contains the logic for individual AI agents
+    │   ├── utils/               # Utility functions and helpers
+    │   ├── __init__.py          # Exposes the main generation function
+    │   └── config.py            # Handles model client configuration
+    │
+    ├── examples/                # Self-contained examples for users
+    │   ├── .env.example         # Template for environment variables
+    │   └── run_example.py       # Main script to demonstrate library usage
+    │
+    ├── .gitignore               # Specifies which files Git should ignore
+    ├── LICENSE                  # The open-source license for the project
+    ├── pyproject.toml           # The modern configuration file for the package
+    └── README.md                # This file!
+
+    ```
 
 ## 🚀 Installation
-Install the framework directly from GitHub using pip:
-
-Bash
-
-pip install git+https://github.com/edilma/AI-Agent-Orchestrator.git
+Install the Blog Agent Framework directly from GitHub using pip:
+    ```bash
+    pip install git+https://github.com/edilma/AI-Agent-Orchestrator.git
+    ```
 
 ## ✍️ Basic Usage
-Here is a simple example of how to import and use the framework in your own Python script.
+Here's how to quickly get started with the built-in example.
 
 ### Running the Example
 
-1. Navigate to the examples directory: cd examples
+1.  Navigate into the examples directory:
+    ```bash
+    cd examples
+    ```
 
-2. Install required packages: pip install python-dotenv (and any others needed for the example).
+2.  Create your own .env file by copying the template. 
+    ```bash
+    # On Windows
+    copy .env.example .env
 
-3. Copy the environment template: cp .env.example .env
+    # On macOS or Linux
+    cp .env.example .env
+    ```
 
-4. Open the new .env file and add your OpenAI API key.
+3.  Add your OpenAi credentials to the new .env file
+    ```bash
+    OPENAI_API_KEY=your_openai_key_here
+    OPENAI_PROJECT_ID=your_project_id_here
+    ```
 
-5. Run the example: python run_example.py
+4.  Run the example script:
+    ```bash
+    python run_example.py
+    ```
+## 🧠 How It Works
 
-Python
+The Blog Agent Framework simulates a collaborative writing and editing process using a team of specialized AI agents. Each agent plays a unique role in refining the blog post.
 
+1. **Writer Agent**  
+   Creates an initial blog post based on a topic prompt. The post is designed to be simple, engaging, and story-driven.
 
-# This is an example of how you would run the async function
-```
-import asyncio
-import os
-from dotenv import load_dotenv
-from blog_agent_framework import Orchestrator
+2. **Critic Agent**  
+   Reviews the writer's draft and offers direct, actionable feedback. This agent evaluates story structure, clarity, tone, and flow—and helps polish the final version by incorporating all key reviewer suggestions.
 
-# This line loads the variables from the .env file into the environment
-load_dotenv()
+3. **SEO Reviewer**  
+   Ensures the blog includes relevant keywords, strong headings, and other on-page SEO elements to improve visibility on AI and search engines like Google and attracts organic traffic.
 
-async def main():
-    # Now, your library can find the OPENAI_API_KEY automatically
-    # because it's loaded into the environment.
-    if not os.getenv("OPENAI_API_KEY"):
-        print("Error: OPENAI_API_KEY not found. Please create a .env file from .env.example and add your key.")
-        return
+4. **Content Marketing Reviewer**  
+   Analyzes structure, engagement, and presentation. Helps make sure the blog is clear, logically organized, and engaging for readers.
 
-    topic = "The Future of Renewable Energy"
-    orchestrator = Orchestrator()
+5. **Clarity and Ethics Reviewer**  
+   Checks that the writing is easy to understand for a general audience, free of confusing or problematic language, and appropriate for public consumption.
 
-    print(f"Generating post for topic: {topic}...")
-    final_post = await orchestrator.run_workflow(topic)
+The agents communicate intelligently to revise and refine the blog post until it meets quality standards for readability, SEO, and flow.
 
-    print("\n--- Generated Blog Post ---")
-    print(final_post)
+## 📜 License
 
-if __name__ == "__main__":
-    asyncio.run(main())
+This project is licensed under the [MIT License](LICENSE).  
+You are free to use, modify, and distribute this software for personal or commercial use, with attribution.
 
-```
+## ✨ Author
 
-
-📜 License
-This project is licensed under the terms of the MIT License.
-
-✨ Author
-Built with 💻 by Edilma Riano using Python and Autogen.
-
+Created with 💻 by **Edilma Riano**  
 Helping businesses and creators use AI to work smarter and scale faster.
+
+🐙 [Follow me on GitHub](https://github.com/edilma)  

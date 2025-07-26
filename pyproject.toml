@@ -9,23 +9,40 @@ version = "1.0.0"
 authors = [
   { name="Edilma Riano", email="edilmadev@gmail.com" }, 
 ]
-description = "A library for orchestrating a team of AI agents to generate high-quality blog posts."
+description = "An AI-powered library that orchestrates a team of agents to generate SEO-optimized, easy-to-read, story-based blog posts"
 readme = "README.md"
 license = { file="LICENSE" }
 requires-python = ">=3.11"
 
 # --- Keywords and Classifiers for PyPI ---
 # Helps users find your package on pypi.org
-keywords = ["ai", "autogen", "llm", "agent", "orchestrator", "blogging"]
+keywords = [
+    "ai",
+    "autogen",
+    "llm",
+    "agent",
+    "orchestrator",
+    "content-generation",
+    "seo",
+    "blog",
+    "marketing",
+    "automation",
+]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: Marketing and Communications",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Operating System :: OS Independent",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Text Processing :: General",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Utilities",
     "Topic :: Text Processing :: General",
 ]
 
@@ -35,8 +52,11 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/edilma/AI-Blog-Project" 
-"Bug Tracker" = "https://github.com/edilma/AI-Blog-Project/issues" 
+Homepage = "https://github.com/edilma/AI-Agent-Orchestrator"
+Documentation = "https://github.com/edilma/AI-Agent-Orchestrator#readme"
+"Bug Tracker" = "https://github.com/edilma/AI-Agent-Orchestrator/issues"
+Source = "https://github.com/edilma/AI-Agent-Orchestrator"
+
 
 # --- Optional Dependencies ---
 # For running examples or tests. Install with: pip install -e .[dev]
@@ -49,3 +69,5 @@ dev = [
 # --- Package Discovery ---
 [tool.setuptools.packages.find]
 where = ["."]  # search in the root directory
+include = ["blog_agent_framework*"]
+
