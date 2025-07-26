@@ -17,7 +17,9 @@ build/
 
 # Generated content
 *.md
-*.json
+!README.md
+!README.es.md
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

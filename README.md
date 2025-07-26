@@ -4,7 +4,7 @@
 An advanced framework for building AI-powered content generation pipelines. This project uses a multi-agent system, powered by Microsoft Autogen, to autonomously write, critique, and review articles for quality, compliance, and SEO.
 **Create smarter, better blogs—autonomously.**
 
-The **Blog Agent Framework** is a plug-and-play Python library that helps you generate high-quality blog posts using a team of AI agents. Built on top of Microsoft’s powerful [Autogen](https://microsoft.github.io/autogen) system, this framework mimics a professional content team: a writer, a critic, and multiple expert reviewers work together to craft concise, SEO-optimized, story-driven articles—designed to engage readers and rank well in search engines.  Applies best practices in digital marketing to improve the reach, structure, and impact of each post. 
+The **Blog Agent Framework** is a plug-and-play Python library that helps you generate high-quality blog posts using a team of AI agents. Built on top of Microsoft’s powerful [Autogen](https://microsoft.github.io/autogen) system, this framework mimics a professional content team: a writer, a critic, and multiple expert reviewers work together to craft concise, SEO-optimized, story-driven articles, designed to engage readers and rank well in search engines.  Applies best practices in digital marketing to improve the reach, structure, and impact of each post. 
 
 Whether you're a solo blogger, content marketer, or developer, you can use this library to automate content creation or integrate it into your own API.
 
