@@ -31,6 +31,17 @@ Ideal para creadores de contenido, emprendedores, educadores o desarrolladores q
 
 ## 🚀 Instalación
 
+
+[![PyPI version](https://badge.fury.io/py/blog-agent-framework.svg)](https://badge.fury.io/py/blog-agent-framework)
+
+
+Instalar desde PyPI:
+
+```bash
+pip install blog-agent-framework
+```
+<sub>Requiere Python 3.11+</sub>
+
 Instala la biblioteca directamente desde GitHub usando `pip`:
 
 ```bash

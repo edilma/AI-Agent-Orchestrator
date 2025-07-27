@@ -51,10 +51,22 @@ The project is structured as a standard Python package, making it easy to instal
     ```
 
 ## 🚀 Installation
+
+[![PyPI version](https://badge.fury.io/py/blog-agent-framework.svg)](https://badge.fury.io/py/blog-agent-framework)
+
+
+Install from PyPI:
+
+```bash
+pip install blog-agent-framework
+```
+<sub>Requires Python 3.11+</sub>
+
 Install the Blog Agent Framework directly from GitHub using pip:
-    ```bash
-    pip install git+https://github.com/edilma/AI-Agent-Orchestrator.git
-    ```
+
+```bash
+pip install git+https://github.com/edilma/AI-Agent-Orchestrator.git
+```
 
 ## ✍️ Basic Usage
 Here's how to quickly get started with the built-in example.

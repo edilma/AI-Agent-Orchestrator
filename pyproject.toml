@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 # --- Basic Package Information ---
 name = "blog-agent-framework"
-version = "1.0.0"
+version = "1.0.1"
 authors = [
   { name="Edilma Riano", email="edilmadev@gmail.com" }, 
 ]
@@ -32,7 +32,6 @@ classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
     "Intended Audience :: Information Technology",
-    "Intended Audience :: Marketing and Communications",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.11",
@@ -48,7 +47,9 @@ classifiers = [
 
 # --- Dependencies ---
 dependencies = [
-    "autogen-ext[openai]>=0.6.4"
+    "autogen-agentchat>=0.2.17",
+    "autogen-ext[openai]>=0.6.4",
+    "openai"
 ]
 
 [project.urls]
