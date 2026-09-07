@@ -1,3 +1,20 @@
+> ### ⚠️ Superseded by [`ai-blog-app`](https://github.com/edilma/ai-blog-app)
+>
+> This project is the first version of the framework and is no longer maintained.
+> It works only with OpenAI, with the provider hardcoded.
+>
+> The successor, [**`ai-blog-app`**](https://pypi.org/project/ai-blog-app/), has the
+> same multi-agent architecture with configurable providers — OpenAI, Gemini, Claude,
+> and local models via Ollama — selectable per call.
+>
+> ```bash
+> pip install ai-blog-app
+> ```
+>
+> This repository stays available for anyone using the original package.
+
+
+
 # Blog Agent Framework
 📖 También disponible en [Español](README.es.md)
 
